@@ -1,7 +1,8 @@
 import sys
+import os
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QListWidgetItem,
                              QMessageBox, QInputDialog)
-#from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt
 from PyQt5.uic import loadUi
 
 
@@ -10,7 +11,11 @@ class TaskPlanner(QMainWindow):
         super().__init__()
 
         # Загружаем UI из файла
-        loadUi('NewUIFile.ui', self)
+        ui_file = os.path.join(os.path.dirname(__file__), 'NewUIFile.ui')
+        loadUi(ui_file, self)
+        
+        # Устанавливаем заголовок окна
+        self.setWindowTitle("Планировщик задач")
 
         # Наполняем списки тестовыми задачами
         self.initialize_tasks()
@@ -28,6 +33,10 @@ class TaskPlanner(QMainWindow):
         self.active_list = None
         self.listWidgetCurrentTasks.itemSelectionChanged.connect(self.set_active_current)
         self.listWidgetCompletedTasks.itemSelectionChanged.connect(self.set_active_completed)
+        
+        # Подключаем обновление состояния кнопок при изменении выделения
+        self.listWidgetCurrentTasks.itemSelectionChanged.connect(self.update_buttons_state)
+        self.listWidgetCompletedTasks.itemSelectionChanged.connect(self.update_buttons_state)
 
         # Первоначальное обновление
         self.update_all_tasks_list()
@@ -73,20 +82,26 @@ class TaskPlanner(QMainWindow):
 
     def set_active_current(self):
         """Устанавливаем текущие задачи как активный список"""
-        self.active_list = self.listWidgetCurrentTasks
-        self.update_buttons_state()
+        if self.listWidgetCurrentTasks.selectedItems():
+            self.active_list = self.listWidgetCurrentTasks
+            # Снимаем выделение с завершенных задач
+            self.listWidgetCompletedTasks.clearSelection()
 
     def set_active_completed(self):
         """Устанавливаем завершенные задачи как активный список"""
-        self.active_list = self.listWidgetCompletedTasks
-        self.update_buttons_state()
+        if self.listWidgetCompletedTasks.selectedItems():
+            self.active_list = self.listWidgetCompletedTasks
+            # Снимаем выделение с текущих задач
+            self.listWidgetCurrentTasks.clearSelection()
 
     def add_task(self):
         """Добавление новой задачи в текущие"""
         task_text, ok = QInputDialog.getText(self, 'Добавить задачу', 'Введите описание задачи:')
-        if ok and task_text:
-            item = QListWidgetItem(task_text)
+        if ok and task_text.strip():  # Проверяем, что текст не пустой
+            item = QListWidgetItem(task_text.strip())
             self.listWidgetCurrentTasks.addItem(item)
+            # Выделяем новую задачу
+            self.listWidgetCurrentTasks.setCurrentItem(item)
             self.update_all_tasks_list()
             self.active_list = self.listWidgetCurrentTasks
 

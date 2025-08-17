@@ -220,10 +220,7 @@ background-color: rgba(255, 255,255, 70);
            <property name="text">
             <string>Добавить запись</string>
            </property>
-           <property name="icon">
-            <iconset resource="Icons/icons.qrc">
-             <normaloff>:/icons/add_circle_32dp_085507_FILL0_wght400_GRAD0_opsz40.svg</normaloff>:/icons/add_circle_32dp_085507_FILL0_wght400_GRAD0_opsz40.svg</iconset>
-           </property>
+
            <property name="iconSize">
             <size>
              <width>20</width>
@@ -261,10 +258,7 @@ background-color: rgba(255, 255,255, 70);
            <property name="text">
             <string>Удалить запись</string>
            </property>
-           <property name="icon">
-            <iconset resource="Icons/icons.qrc">
-             <normaloff>:/icons/delete_32dp_085507_FILL0_wght400_GRAD0_opsz40.svg</normaloff>:/icons/delete_32dp_085507_FILL0_wght400_GRAD0_opsz40.svg</iconset>
-           </property>
+
            <property name="iconSize">
             <size>
              <width>20</width>
@@ -322,10 +316,7 @@ background-color: rgba(255, 255,255, 70);
            <property name="text">
             <string>Переместить влево</string>
            </property>
-           <property name="icon">
-            <iconset resource="Icons/icons.qrc">
-             <normaloff>:/icons/arrow_back_32dp_085507_FILL0_wght400_GRAD0_opsz40.svg</normaloff>:/icons/arrow_back_32dp_085507_FILL0_wght400_GRAD0_opsz40.svg</iconset>
-           </property>
+
            <property name="iconSize">
             <size>
              <width>20</width>
@@ -363,10 +354,7 @@ background-color: rgba(255, 255,255, 70);
            <property name="text">
             <string>Переместить вправо</string>
            </property>
-           <property name="icon">
-            <iconset resource="Icons/icons.qrc">
-             <normaloff>:/icons/arrow_forward_32dp_085507_FILL0_wght400_GRAD0_opsz40.svg</normaloff>:/icons/arrow_forward_32dp_085507_FILL0_wght400_GRAD0_opsz40.svg</iconset>
-           </property>
+
            <property name="iconSize">
             <size>
              <width>20</width>
@@ -383,8 +371,6 @@ background-color: rgba(255, 255,255, 70);
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="Icons/icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
